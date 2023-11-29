@@ -19,6 +19,7 @@ type Movie = {
 }
 
 // Define the list of movies (already populated with movie instances)
+// Define the list of movies (already populated with movie instances)
 let moviesList = [
     {Name = "CODA"; RunLength = 111; Genre = Drama; Director = {Name = "Sian Heder"; Movies = 9}; IMDBRating = 8.1}
     {Name = "Belfast"; RunLength = 98; Genre = Comedy; Director = {Name = "Kenneth Branagh"; Movies = 23}; IMDBRating = 7.3}
@@ -29,5 +30,23 @@ let moviesList = [
     {Name = "Licorice Pizza"; RunLength = 133; Genre = Comedy; Director = {Name = "Paul Thomas Anderson"; Movies = 49}; IMDBRating = 7.4}
     {Name = "Nightmare Alley"; RunLength = 150; Genre = Thriller; Director = {Name = "Guillermo Del Toro"; Movies = 22}; IMDBRating = 7.1}
 ]
-//filter the proabale oscar winners by applying the filter function to fetch movies that have an IMDB rating greater than 7.4.
+
+// Filter to find probable Oscar winners with IMDB rating > 7.4
 let probableOscarWinners = moviesList |> List.filter (fun movie -> movie.IMDBRating > 7.4)
+
+// Convert run length to hours and minutes
+let convertRunLengthToHours movieList =
+    movieList
+    |> List.map (fun movie ->
+        let hours = movie.RunLength / 60
+        let minutes = movie.RunLength % 60
+        sprintf "%dh %02dmin" hours minutes)
+
+let runLengthsInHours = convertRunLengthToHours probableOscarWinners
+
+// Output the results for verification
+printfn "The Highest chance of movies to became an Oscar Award winnners are : "
+probableOscarWinners |> List.iter (fun movie -> printfn "%s" movie.Name)
+
+printfn "\nThe total run lengths after converting Hours and minutes for each movie is  "
+runLengthsInHours |> List.iter (fun length -> printfn "%s" length)
