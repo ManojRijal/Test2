@@ -29,5 +29,5 @@ let moviesList = [
     {Name = "Licorice Pizza"; RunLength = 133; Genre = Comedy; Director = {Name = "Paul Thomas Anderson"; Movies = 49}; IMDBRating = 7.4}
     {Name = "Nightmare Alley"; RunLength = 150; Genre = Thriller; Director = {Name = "Guillermo Del Toro"; Movies = 22}; IMDBRating = 7.1}
 ]
-
-
+//filter the proabale oscar winners by applying the filter function to fetch movies that have an IMDB rating greater than 7.4.
+let probableOscarWinners = moviesList |> List.filter (fun movie -> movie.IMDBRating > 7.4)
